@@ -1,0 +1,30 @@
+﻿Source,Species.Site,growth.rate,density.no.m2,State,Species
+Siepielski and McPeek (2010),E. ebrium,0.00910364,196,NH,E. ebrium
+Siepielski and McPeek (2010),E. ebrium,0.008034074,590,NH,E. ebrium
+Siepielski and McPeek (2010),E. vesperum,0.007003474,196,NH,E. ebrium
+Siepielski and McPeek (2010),E. vesperum,0.006657227,590,NH,E. ebrium
+Siepielski et al. (2011),E.vesperum,0.004338271,85,NH,E. ebrium
+Siepielski et al. (2011),E.vesperum,0.004500765,170,NH,E. ebrium
+Siepielski et al. (2011),E.vesperum,0.004380135,281,NH,E. ebrium
+Siepielski et al. (2011),E.vesperum,0.004046438,563,NH,E. ebrium
+Siepielski et al. (2011),E.vesperum,0.002872913,845,NH,E. ebrium
+Siepielski et al. (2016),E. carunculatum - Big Laguna Lake,0.006389295,202,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Big Laguna Lake,0.002606356,404,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Boulder Oaks 1,0.008046877,202,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Boulder Oaks 1,0.001896758,404,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Boulder Oaks 2,0.006798459,202,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Boulder Oaks 2,0.003489098,404,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Corte Madera Lake,0.004971886,202,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Corte Madera Lake,0.002089754,404,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Corte Madera Pond,0.009337641,202,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Corte Madera Pond,0.003199672,404,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Water of the Woods,0.007856073,202,CA,E. carunculatum
+Siepielski et al. (2016),E. carunculatum - Water of the Woods,0.00223647,404,CA,E. carunculatum
+Bried and Siepielski (2019),E. vesperum-MI,0.005177956,160,MI,E. vesperum
+Bried and Siepielski (2019),E. vesperum-MI,0.005312846,482,MI,E. vesperum
+Bried and Siepielski (2019),E.signatum-MI,0.00844765,160,MI,E. signatum
+Bried and Siepielski (2019),E.signatum-MI,0.00845612,482,MI,E. signatum
+Bried and Siepielski (2019),E.vesperum-AR,0.00443686,160,AR,E. vesperum
+Bried and Siepielski (2019),E.vesperum-AR,0.005213296,482,AR,E. vesperum
+Bried and Siepielski (2019),E.signatum-AR,0.006932783,160,AR,E. signatum
+Bried and Siepielski (2019),E.signatum-AR,0.006823108,482,AR,E. signatum
