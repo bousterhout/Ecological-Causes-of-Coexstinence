@@ -871,14 +871,20 @@ gg2 <- past.growth.plot.data$data[[2]]
 
 
 past.gr.graph 
-  ggplot(data = gg2, aes(x = x, y = y, color = colour))+
-  geom_jitter(aes(shape = State, color = Species), width = 10, height = 0.0001) +
-  scale_color_manual(values = c('#e66101','#fdb863','#b2abd2','#5e3c99'))+
-  geom_smooth(method = 'lm', fullrange = TRUE, se = FALSE) +
+  ggplot()+
+  geom_jitter(data = past.gr, aes(x = density.no.m2, y = growth.rate, shape = State, color = Species),
+              width = 10, height = 0.0001) +
+  geom_ribbon(data = gg2, aes(x=x, ymin = ymin, ymax = ymax, fill = as.factor(group)), alpha = 0.2)+
+  scale_fill_manual(values = c('#e66101','#fdb863','#b2abd2','#5e3c99'))+
+  geom_line(data = gg2, aes(x = x, y = y, color = as.factor(group)))+
+  geom_line(data = gg2, aes(x = x, y = ymin, color = as.factor(group)), lty = 'dashed')+
+  geom_line(data = gg2, aes(x = x, y = ymax, color = as.factor(group)), lty = 'dashed')+
+  geom_ribbon(data = gg2, aes(x=x, ymin = ymin, ymax = ymax, fill = as.factor(group)))+  
+  scale_color_manual(values = c('#e66101','#fdb863','#b2abd2','#5e3c99',
+                                '#e66101','#fdb863','#b2abd2','#5e3c99'))+
   scale_shape_manual(values = c(15:17,8)) +
   xlab(expression(Density~(m^{2})))+
   ylab(expression(Per~capita~growth~(day^{-1}))) +
-  theme_classic()+
   theme(legend.position = "none")
 #  theme(legend.text = element_text(rep(face = "plain", 4), rep(face = "italic", 4)))
 
