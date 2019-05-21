@@ -1,8 +1,7 @@
-library(ggplot2)
-library(plyr)
-library(reshape2)
-library(cowplot)
-library(grid)
+source('Functions.R')
+
+packages <- c('ggplot2', 'plyr', 'reshape2', 'cowplot', 'grid', 'ggpubr')
+package.check(packages)
 
 source('DataSteps.R')
 source('Analysis_Growth.R')
@@ -853,8 +852,6 @@ dev.off()
 
 past.gr <- read.csv('Data/Past.growth.rates.csv')
 
-library(cowplot)
-library(ggpubr)
 
 gg.test <- 
   ggplot(data = past.gr, aes(x = density.no.m2, y = growth.rate, color = Species))+
@@ -870,25 +867,56 @@ past.growth.plot.data <- ggplot_build(gg.test)
 gg2 <- past.growth.plot.data$data[[2]]
 
 
-past.gr.graph 
+past.gr.graph.1 <-
   ggplot()+
   geom_jitter(data = past.gr, aes(x = density.no.m2, y = growth.rate, shape = State, color = Species),
               width = 10, height = 0.0001) +
   geom_ribbon(data = gg2, aes(x=x, ymin = ymin, ymax = ymax, fill = as.factor(group)), alpha = 0.2)+
-  scale_fill_manual(values = c('#e66101','#fdb863','#b2abd2','#5e3c99'))+
+  scale_fill_manual(values = alpha(c('#e41a1c','#377eb8','#4daf4a','#984ea3'), 0.2))+
   geom_line(data = gg2, aes(x = x, y = y, color = as.factor(group)))+
   geom_line(data = gg2, aes(x = x, y = ymin, color = as.factor(group)), lty = 'dashed')+
   geom_line(data = gg2, aes(x = x, y = ymax, color = as.factor(group)), lty = 'dashed')+
-  geom_ribbon(data = gg2, aes(x=x, ymin = ymin, ymax = ymax, fill = as.factor(group)))+  
-  scale_color_manual(values = c('#e66101','#fdb863','#b2abd2','#5e3c99',
-                                '#e66101','#fdb863','#b2abd2','#5e3c99'))+
+  scale_color_manual(values = c('#e41a1c','#377eb8','#4daf4a','#984ea3',
+                                '#e41a1c','#377eb8','#4daf4a','#984ea3'))+
   scale_shape_manual(values = c(15:17,8)) +
   xlab(expression(Density~(m^{2})))+
   ylab(expression(Per~capita~growth~(day^{-1}))) +
   theme(legend.position = "none")
 #  theme(legend.text = element_text(rep(face = "plain", 4), rep(face = "italic", 4)))
 
+past.gr.graph.2 <-
+  ggplot()+
+  geom_jitter(data = past.gr, aes(x = density.no.m2, y = growth.rate, shape = State, color = Species),
+              width = 10, height = 0.0001) +
+  geom_ribbon(data = gg2, aes(x=x, ymin = ymin, ymax = ymax, fill = as.factor(group)), alpha = 0.2)+
+  scale_fill_manual(values = alpha(c('#e41a1c','#377eb8','#4daf4a','#984ea3'), 0.2))+
+  geom_line(data = gg2, aes(x = x, y = y, color = as.factor(group)))+
+  geom_line(data = gg2, aes(x = x, y = ymin, color = as.factor(group)), lty = 'dashed')+
+  geom_line(data = gg2, aes(x = x, y = ymax, color = as.factor(group)), lty = 'dashed')+
+  geom_smooth(data = past.gr, aes(x = density.no.m2, y = growth.rate), method = 'lm', col = 'black') +
+  scale_color_manual(values = c('#e41a1c','#377eb8','#4daf4a','#984ea3',
+                                '#e41a1c','#377eb8','#4daf4a','#984ea3'))+
+  scale_shape_manual(values = c(15:17,8)) +
+  xlab(expression(Density~(m^{2})))+
+  ylab(expression(Per~capita~growth~(day^{-1}))) +
+  theme(legend.position = "none")
+#  theme(legend.text = element_text(rep(face = "plain", 4), rep(face = "italic", 4)))
+
+past.gr.graph.3 <-
+  ggplot()+
+  geom_smooth(data = past.gr, aes(x = density.no.m2, y = growth.rate), method = 'lm', col = 'black') +
+  geom_jitter(data = past.gr, aes(x = density.no.m2, y = growth.rate, shape = State, color = Species),
+              width = 10, height = 0.0001) +
+  scale_color_manual(values = c('#e41a1c','#377eb8','#4daf4a','#984ea3'))+
+  scale_shape_manual(values = c(15:17,8)) +
+  xlab(expression(Density~(m^{2})))+
+  ylab(expression(Per~capita~growth~(day^{-1}))) +
+  theme(legend.position = "none")
+#  theme(legend.text = element_text(rep(face = "plain", 4), rep(face = "italic", 4)))
+
+past.gr.graph.4 <-
+past.gr.graph.3 + facet_grid(. ~ Species) 
 
 pdf("Figures/PastGrowth2.pdf", width=4, height=4)
-past.gr.graph
+plot_grid(past.gr.graph.3, past.gr.graph.4, ncol = 1, nrow= 2)
 dev.off()
