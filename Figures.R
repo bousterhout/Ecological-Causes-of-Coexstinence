@@ -902,21 +902,23 @@ past.gr.graph.2 <-
   theme(legend.position = "none")
 #  theme(legend.text = element_text(rep(face = "plain", 4), rep(face = "italic", 4)))
 
-past.gr.graph.3 <-
-  ggplot()+
-  geom_smooth(data = past.gr, aes(x = density.no.m2, y = growth.rate), method = 'lm', col = 'black') +
-  geom_jitter(data = past.gr, aes(x = density.no.m2, y = growth.rate, shape = State, color = Species),
-              width = 10, height = 0.0001) +
+past.gr.graph.3 
+  ggplot(data = past.gr, aes(x = density.no.m2, y = growth.rate,
+                             lty = Species, color = Species, shape = Source))+
+  geom_smooth(method = 'lm', se = F) +
+  geom_point(data = past.gr, aes(x = density.no.m2, y = growth.rate))+
+            #  width = 10, height = 0.0001) +
   scale_color_manual(values = c('#e41a1c','#377eb8','#4daf4a','#984ea3'))+
-  scale_shape_manual(values = c(15:17,8)) +
+  scale_shape_manual(values = c(0:10)) +
+  scale_linetype_manual(values = c('dotted', 'dashed', 'solid', 'twodash'))
   xlab(expression(Density~(m^{2})))+
-  ylab(expression(Per~capita~growth~(day^{-1}))) +
-  theme(legend.position = "none")
-#  theme(legend.text = element_text(rep(face = "plain", 4), rep(face = "italic", 4)))
+  ylab(expression(Per~capita~growth~(day^{-1}))) 
+  # theme(legend.position = "none")
+  # theme(legend.text = element_text(rep(face = "plain", 4), rep(face = "italic", 4)))
 
 past.gr.graph.4 <-
-past.gr.graph.3 + facet_grid(. ~ Species) 
+past.gr.graph.3 + facet_grid(Source ~ Species) 
 
-pdf("Figures/PastGrowth2.pdf", width=4, height=4)
+pdf("PastGrowth_Panel.pdf", width=6, height=6)
 plot_grid(past.gr.graph.3, past.gr.graph.4, ncol = 1, nrow= 2)
 dev.off()

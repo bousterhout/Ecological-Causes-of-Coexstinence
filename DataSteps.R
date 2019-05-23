@@ -3,11 +3,12 @@
 # 12.19.17
 # BHO and MS
 ########################
-library(reshape2)
-library(plyr)
-library(dplyr)
-library(ggplot2)
 
+source('Functions.R')
+packages <- c('reshape2', 'plyr', 'dplyr', 'ggplot2')
+package.check(packages)
+
+#Read in data from experiment
 start <- read.csv("Data/ExperimentalTreatments.csv")
 start$Cage <- as.factor(start$Cage)
 colnames(start)[6:8] <- c("ENTR.Abun.Init", "ENVE.Abun.Init", "ENEX.Abun.Init")
@@ -21,9 +22,6 @@ colnames(final)[7] <-"I_F"
 final[,8]<-NULL
 
 #Aggregate measurement data
-
-#1)x Subset out initial / final
-
 init.hw <- subset (final, I_F == "I")
 final.hw <-subset(final, I_F == "F")
 
@@ -33,6 +31,7 @@ summarise(avg = mean(HW), sd = sd(HW))
 
 summary$lakesp <- paste(summary$Lake, summary$Species, sep="_")
 
+#Quick summary plot of average HW by lake and species
 ggplot(summary) +
   geom_point(aes(x = lakesp, y = avg, color = Lake)) +
   geom_errorbar(aes(x = lakesp, ymax = avg + sd, ymin = avg - sd, colour = Lake), width = 0)+
@@ -40,7 +39,8 @@ ggplot(summary) +
   xlab("Species")+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-#2) Mean lnHW and lnOWPL for each Lake, Cage, Species
+#Calculate the mean lnHW and lnOWPL for each Lake, Cage, Species
+
 init.hw$lnHW <- log(init.hw$HW)
 init.hw$lnOWPL <- log(init.hw$OWPL)
 init.hw.mean <- aggregate(init.hw[c("lnHW", "lnOWPL")], by =init.hw[c('Lake', 'Species')], FUN = 'mean')
